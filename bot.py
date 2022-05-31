@@ -25,6 +25,7 @@ async def echo(message: types.Message):
 @dp.message_handler(commands = ['song_text'])
 async def song_text(message: types.Message):
     try:
+        await message.answer(main.get_song_info_1(message.get_args()) + '\n' + main.get_song_info_2(message.get_args()))
         await message.answer(main.get_song(message.get_args()))
     except AttributeError:
         await message.reply('Такой песни не найдено :(')
