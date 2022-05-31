@@ -17,17 +17,6 @@ dp = Dispatcher(bot)
 # async def echo(message: types.Message):
 #     await message.answer(message.text)
 
-@dp.message_handler()
-async def echo(message: types.Message):
-    if message.text == commands.mainMenu:
-        await bot.send_message(message.from_user.id, random.choice(commands.Messages), reply_markup = nav.mainMenu)
-
-    elif message.text == commands.otherMenu:
-        await bot.send_message(message.from_user.id, random.choice(commands.Messages), reply_markup = nav.otherMenu)
-
-    elif message.text == commands.song_text:
-        await message.answer('Введите команду /song_text')
-
 
 @dp.message_handler(commands = ['start'])
 async def echo(message: types.Message):
@@ -39,6 +28,17 @@ async def song_text(message: types.Message):
         await message.answer(main.get_song(message.get_args()))
     except AttributeError:
         await message.reply('Такой песни не найдено :(')
+
+@dp.message_handler()
+async def echo(message: types.Message):
+    if message.text == commands.mainMenu:
+        await bot.send_message(message.from_user.id, random.choice(commands.Messages), reply_markup = nav.mainMenu)
+
+    elif message.text == commands.otherMenu:
+        await bot.send_message(message.from_user.id, random.choice(commands.Messages), reply_markup = nav.otherMenu)
+
+    elif message.text == commands.song_text:
+        await message.answer('Введите команду /song_text [Название песни]')
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates='True')
