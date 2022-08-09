@@ -1,4 +1,3 @@
-from pyparsing import Each
 import config
 import logging
 import main
